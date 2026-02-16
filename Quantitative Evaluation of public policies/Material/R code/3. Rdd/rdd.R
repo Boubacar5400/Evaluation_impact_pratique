@@ -1,0 +1,76 @@
+rm(list=ls())
+
+# Generate random numbers
+
+W <- runif(1000, -1, 1)
+y <- 3 + 2 * W + 10 * (W>=0) + rnorm(1000)
+
+# Package rddtools
+
+library(rddtools)
+
+# Construction of data and graphical representation 
+data <- rdd_data(y, W, cutpoint = 0)
+plot(data,
+     col = "steelblue",
+     cex = 0.35, 
+     xlab = "W", 
+     ylab = "Y")
+
+# Estimation of a sharp RDD model 
+rdd_mod <- rdd_reg_lm(rdd_object = data, 
+                      slope = "same")
+summary(rdd_mod)
+
+# Graphical representation 
+plot(rdd_mod,
+     cex = 0.35, 
+     col = "steelblue", 
+     xlab = "W", 
+     ylab = "Y")
+
+# Generation of data for a fuzzy design
+library(MASS)
+
+mu <- c(0, 0)
+sigma <- matrix(c(1, 0.7, 0.7, 1), ncol = 2)
+
+set.seed(1234)
+d <- as.data.frame(mvrnorm(2000, mu, sigma))
+colnames(d) <- c("W", "Y")
+
+d$treatProb <- ifelse(d$W < 0, 0, 0.8)
+
+fuzz <- sapply(X = d$treatProb, FUN = function(x) rbinom(1, 1, prob = x)) # introduction of the fuzziness
+
+d$Y <- d$Y + fuzz * 2 # Treatment effect
+
+# We generate a graph of the groups
+
+plot(d$W, d$Y,
+     col = c("steelblue", "darkred")[factor(fuzz)], 
+     pch= 20, 
+     cex = 0.5,
+     xlim = c(-3, 3),
+     ylim = c(-3.5, 5),
+     xlab = "W",
+     ylab = "Y")
+abline(v = 0, lty = 2)
+
+# Estimation of fuzzy RDD
+
+data <- rdd_data(d$Y, d$W, 
+                 cutpoint = 0, 
+                 z = d$treatProb)
+
+frdd_mod <- rdd_reg_lm(rdd_object = data, 
+                       slope = "same")
+frdd_mod
+plot(frdd_mod, 
+     cex = 0.5, 
+     lwd = 0.4,
+     xlim = c(-4, 4),
+     ylim = c(-3.5, 5),
+     xlab = "W",
+     ylab = "Y")
+

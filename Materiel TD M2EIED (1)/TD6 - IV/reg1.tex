@@ -1,0 +1,34 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{longtable}
+\begin{document}
+	\begin{longtable}{l*{6}{c}}
+		\hline\hline\endfirsthead\hline\endhead\hline\endfoot\endlastfoot
+		&\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}&\multicolumn{1}{c}{(5)}&\multicolumn{1}{c}{(6)}\\
+		&\multicolumn{1}{c}{log PPP GDP pc in 1995, World Bank}&\multicolumn{1}{c}{log PPP GDP pc in 1995, World Bank}&\multicolumn{1}{c}{log PPP GDP pc in 1995, World Bank}&\multicolumn{1}{c}{log PPP GDP pc in 1995, World Bank}&\multicolumn{1}{c}{log PPP GDP pc in 1995, World Bank}&\multicolumn{1}{c}{log PPP GDP pc in 1995, World Bank}\\
+		\hline
+		average protection against expropriation risk&       0.532&       0.522&       0.463&       0.390&       0.468&       0.401\\
+		&    (0.0406)&    (0.0612)&    (0.0555)&    (0.0507)&    (0.0642)&    (0.0591)\\
+		[1em]
+		Abs(latitude of capital)/90&            &            &       0.872&       0.333&       1.577&       0.875\\
+		&            &            &     (0.488)&     (0.445)&     (0.710)&     (0.628)\\
+		[1em]
+		dummy=1 for Africa  &            &            &            &      -0.916&            &      -0.881\\
+		&            &            &            &     (0.166)&            &     (0.170)\\
+		[1em]
+		=1 for all of asia  &            &            &            &      -0.153&            &      -0.577\\
+		&            &            &            &     (0.155)&            &     (0.231)\\
+		[1em]
+		dummy=1 if not in Asia, Africa, or the Americas&            &            &            &       0.304&            &       0.107\\
+		&            &            &            &     (0.375)&            &     (0.382)\\
+		[1em]
+		Constant            &       4.626&       4.660&       4.873&       5.851&       4.728&       5.737\\
+		&     (0.301)&     (0.409)&     (0.328)&     (0.340)&     (0.397)&     (0.398)\\
+		\hline
+		Observations        &         111&          64&         111&         111&          64&          64\\
+		\(R^{2}\)           &       0.611&       0.540&       0.623&       0.715&       0.574&       0.714\\
+		\hline\hline
+		\multicolumn{7}{l}{\footnotesize Standard errors in parentheses}\\
+	\end{longtable}
+	
+\end{document}
